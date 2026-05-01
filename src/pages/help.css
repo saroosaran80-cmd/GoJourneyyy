@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.help-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  font-family: 'Inter', sans-serif;
+  color: #e0e0e0;
+}
+
+/* ── Hero ── */
+.help-hero {
+  background: linear-gradient(135deg, rgba(48, 43, 99, 0.9), rgba(0, 198, 255, 0.2));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 60px 24px 40px;
+  text-align: center;
+}
+
+.help-hero-content {
+  text-align: center;
+}
+
+.help-hero-icon {
+  font-size: 56px;
+  margin-bottom: 16px;
+  animation: float 3s ease infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-10px)
+  }
+}
+
+.help-hero h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.help-hero p {
+  font-size: 16px;
+  opacity: 0.65;
+  margin-bottom: 28px;
+}
+
+.help-contact-strip {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.help-contact-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s;
+}
+
+.help-contact-pill:hover {
+  background: rgba(0, 255, 174, 0.1);
+  border-color: rgba(0, 255, 174, 0.3);
+}
+
+/* ── Body ── */
+.help-body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 16px 60px;
+}
+
+/* ── Tabs ── */
+.help-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 6px;
+}
+
+.help-tab {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: 'Inter', sans-serif;
+}
+
+.help-tab:hover {
+  color: #fff;
+}
+
+.help-tab.active {
+  background: linear-gradient(135deg, rgba(0, 255, 174, 0.15), rgba(0, 198, 255, 0.15));
+  border: 1px solid rgba(0, 255, 174, 0.3);
+  color: #00ffae;
+}
+
+/* ── Panel ── */
+.help-panel {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+.help-panel h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.help-subtitle {
+  font-size: 14px;
+  opacity: 0.55;
+  margin-bottom: 24px;
+}
+
+.animate-in {
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.faq-item.open {
+  border-color: rgba(0, 255, 174, 0.3);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  color: #e0e0e0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.25s;
+}
+
+.faq-question:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.faq-item.open .faq-question {
+  color: #00ffae;
+  background: rgba(0, 255, 174, 0.05);
+}
+
+.faq-chevron {
+  font-size: 12px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.faq-answer {
+  padding: 16px 20px 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.75;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+/* ── Cancel Section ── */
+.cancel-policy-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.policy-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.policy-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.policy-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.policy-item span {
+  opacity: 0.55;
+  font-size: 12px;
+}
+
+.cancel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.help-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.help-field label {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.help-field input,
+.help-field textarea,
+.help-field select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.25s;
+}
+
+.help-field input::placeholder,
+.help-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.help-field input:focus,
+.help-field textarea:focus,
+.help-field select:focus {
+  outline: none;
+  border-color: #00ffae;
+  background: rgba(0, 255, 174, 0.06);
+  box-shadow: 0 0 0 3px rgba(0, 255, 174, 0.15);
+}
+
+.help-field input.err {
+  border-color: #ff4757;
+}
+
+.help-err {
+  color: #ff4757;
+  font-size: 12px;
+}
+
+.help-btn-danger {
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #ff4757, #c0392b);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: 'Inter', sans-serif;
+}
+
+.help-btn-danger:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(255, 71, 87, 0.4);
+}
+
+.help-btn-danger:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.cancel-success {
+  background: rgba(0, 255, 174, 0.08);
+  border: 1px solid rgba(0, 255, 174, 0.25);
+  border-radius: 14px;
+  padding: 18px 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.cancel-success strong {
+  color: #00ffae;
+}
+
+/* ── Contact Form ── */
+.help-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.help-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.help-btn-primary {
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #00ffae, #00c6ff);
+  color: #000;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: 'Inter', sans-serif;
+}
+
+.help-btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(0, 255, 174, 0.4);
+}
+
+/* Success Screen */
+.help-success-screen {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.help-success-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.help-success-screen h3 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.help-success-screen p {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.help-success-screen strong {
+  color: #00ffae;
+}
+
+.help-success-screen button {
+  padding: 12px 28px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #00ffae, #00c6ff);
+  border: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .help-hero h1 {
+    font-size: 26px;
+  }
+
+  .cancel-policy-row {
+    grid-template-columns: 1fr;
+  }
+
+  .help-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .help-tabs {
+    flex-direction: column;
+  }
+}

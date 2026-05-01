@@ -1,0 +1,802 @@
+/* ============================================================
+   BOOKING CONFIRMATION — GoJourney Premium Design
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.conf-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  font-family: 'Inter', sans-serif;
+  color: #e0e0e0;
+  padding: 20px 16px 60px;
+}
+
+/* ── Error ── */
+.conf-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  background: linear-gradient(135deg, #0f0c29, #302b63);
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+}
+
+.conf-error-icon {
+  font-size: 60px;
+}
+
+.conf-error h2 {
+  font-size: 24px;
+}
+
+.conf-error p {
+  opacity: 0.6;
+}
+
+.conf-home-btn {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #00ffae, #00c6ff);
+  border-radius: 30px;
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+/* ── Success Banner ── */
+.conf-banner {
+  text-align: center;
+  padding: 48px 20px 36px;
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.conf-checkmark {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00ffae, #00c6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 44px;
+  color: #000;
+  font-weight: 900;
+  box-shadow: 0 0 40px rgba(0, 255, 174, 0.5), 0 0 80px rgba(0, 255, 174, 0.2);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 40px rgba(0, 255, 174, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 60px rgba(0, 255, 174, 0.8);
+  }
+}
+
+.conf-banner h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.conf-booking-id {
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.conf-booking-id strong {
+  color: #00ffae;
+}
+
+.conf-subtitle {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* ── Body Layout ── */
+.conf-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Ticket Card ── */
+.conf-ticket {
+  position: relative;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  color: #1a1a2e;
+}
+/* decorative perforation look top/bottom */
+.conf-ticket::before,
+.conf-ticket::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  left: 0;
+  background: repeating-linear-gradient(90deg,#fff,#fff 6px,transparent 6px,transparent 12px);
+  pointer-events: none;
+}
+.conf-ticket::before { top: -20px; }
+.conf-ticket::after { bottom: -20px; }
+
+/* ticket header section */
+.ticket-header {
+  background: linear-gradient(135deg, #302b63, #24243e);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.th-logo strong {
+  font-weight: 800;
+  margin-left: 8px;
+}
+.th-status {
+  background: #00ffae;
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ticket-meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 24px 12px;
+  font-size: 13px;
+  color: #555;
+  background: #f7f7f9;
+}
+
+/* Journey Header */
+.ticket-journey {
+  background: linear-gradient(135deg, #302b63, #24243e);
+  color: #fff;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tj-city-name {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.tj-time {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.tj-city.right {
+  text-align: right;
+}
+
+.tj-middle {
+  text-align: center;
+  flex: 1;
+}
+
+.tj-duration {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+
+.tj-arrow {
+  font-size: 14px;
+  color: #00ffae;
+  letter-spacing: 2px;
+}
+
+.tj-date {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 6px;
+}
+
+/* Divider with notches */
+.ticket-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 -16px;
+  background: #fff;
+}
+
+.td-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f0c29, #302b63);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.td-dot.left {
+  left: -14px;
+}
+
+.td-dot.right {
+  right: -14px;
+}
+
+.td-line {
+  flex: 1;
+  border-top: 2px dashed #d0d0d0;
+  margin: 14px 28px;
+}
+
+/* Details Grid */
+.ticket-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 24px 32px;
+  border-bottom: 2px dashed #e5e5e5;
+}
+
+
+.tdg-section h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.tdg-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tdg-row span {
+  color: #888;
+}
+
+.tdg-row strong {
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+/* Passengers */
+.ticket-passengers {
+  padding: 24px 32px;
+  border-bottom: 2px dashed #e5e5e5;
+}
+
+.ticket-passengers h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.tp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tp-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f8f8ff;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.tp-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #302b63, #00c6ff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.tp-info {
+  flex: 1;
+}
+
+.tp-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1a1a2e;
+}
+
+.tp-meta {
+  font-size: 12px;
+  color: #888;
+}
+
+.tp-seat {
+  background: linear-gradient(135deg, #302b63, #24243e);
+  color: #00ffae;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Payment */
+.ticket-payment {
+  padding: 24px 32px;
+}
+
+.ticket-payment h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+
+.psr-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+}
+
+.psr-row.discount span {
+  color: #22c55e;
+}
+
+.psr-row.method span:last-child {
+  font-weight: 600;
+  color: #302b63;
+}
+
+.psr-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 12px 0;
+  margin: 4px 0;
+  color: #1a1a2e;
+  border-top: 2px solid #302b63;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.status-badge {
+  background: #dcfce7;
+  color: #16a34a;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* QR code inside ticket */
+.ticket-qr {
+  text-align: center;
+  padding: 24px 32px;
+  border-top: 2px dashed #e5e5e5;
+}
+.ticket-qr img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+.qr-label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* ── Right Side ── */
+.conf-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Actions */
+.conf-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.conf-btn-print,
+.conf-btn-home,
+.conf-btn-bookings {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.25s;
+  font-family: 'Inter', sans-serif;
+}
+
+.conf-btn-print {
+  background: linear-gradient(135deg, #00ffae, #00c6ff);
+  color: #000;
+}
+
+.conf-btn-print:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(0, 255, 174, 0.4);
+}
+
+.conf-btn-home {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  color: #e0e0e0;
+}
+
+.conf-btn-home:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.conf-btn-bookings {
+  background: rgba(48, 43, 99, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+.conf-btn-bookings:hover {
+  background: rgba(48, 43, 99, 0.9);
+}
+
+/* Notes */
+.conf-notes {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.conf-notes h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.conf-notes ul {
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conf-notes li {
+  font-size: 13px;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+.conf-notes strong {
+  color: #00ffae;
+}
+
+/* Barcode */
+.conf-barcode {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.barcode-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.bar {
+  width: 3px;
+  background: linear-gradient(to top, #00ffae, #00c6ff);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.conf-barcode p {
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: 0.5;
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Print Styles ── */
+@media print {
+  /* keep the rich ticket colors instead of forcing white */
+  .conf-page {
+    background: transparent !important;
+    color: #000;
+  }
+  body {
+    background: transparent !important;
+  }
+
+  /* hide non‑ticket UI elements */
+  .conf-actions,
+  .conf-barcode,
+  .email-sent-banner,
+  .conf-banner {
+    display: none !important;
+  }
+
+  /* make the ticket full‑width on paper */
+  .conf-body {
+    grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0;
+  }
+  .conf-ticket {
+    box-shadow: none;
+    border: none;
+    margin: 0 auto;
+    width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* preserve colored header and notches on print */
+  .ticket-journey {
+    background: linear-gradient(135deg, #302b63, #24243e) !important;
+    color: #fff !important;
+  }
+  .td-dot {
+    background: linear-gradient(135deg, #0f0c29, #302b63) !important;
+  }
+  .td-line {
+    border-top: 2px dashed #444 !important;
+  }
+
+  /* simulate perforation cut on ticket edges */
+  .conf-ticket::before,
+  .conf-ticket::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    left: 0;
+    background: repeating-linear-gradient(90deg,#fff,#fff 8px,transparent 8px,transparent 16px);
+    pointer-events: none;
+  }
+  .conf-ticket::before { top: -40px; }
+  .conf-ticket::after { bottom: -40px; }
+
+  /* ensure text is black on white background where appropriate */
+  .conf-ticket,
+  .ticket-details-grid,
+  .ticket-passengers,
+  .ticket-payment,
+  .conf-notes {
+    color: #000;
+    background: #fff;
+  }
+  .ticket-details-grid h3,
+  .ticket-passengers h3,
+  .ticket-payment h3,
+  .conf-notes h3 {
+    color: #444;
+  }
+
+  /* reduce margins on print */
+  .conf-page {
+    padding: 0;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .conf-body {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .conf-banner h1 {
+    font-size: 26px;
+  }
+
+  .conf-checkmark {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+  }
+
+  .ticket-journey {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .tj-city.right {
+    text-align: center;
+  }
+
+  .tj-arrow {
+    transform: rotate(90deg);
+    display: inline-block;
+  }
+}
+
+/* ── Email Sent Banner ── */
+.email-sent-banner {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  border: 1.5px solid rgba(0, 255, 174, 0.5);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0, 255, 174, 0.25), 0 0 0 1px rgba(0, 255, 174, 0.1);
+  animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  max-width: 380px;
+  backdrop-filter: blur(12px);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.esb-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.esb-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.esb-text strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #00ffae;
+  letter-spacing: 0.3px;
+}
+
+.esb-text span {
+  font-size: 12.5px;
+  color: rgba(224, 224, 224, 0.75);
+  line-height: 1.4;
+}
+
+.esb-text em {
+  font-style: normal;
+  color: #00c6ff;
+  font-weight: 600;
+}
+
+.esb-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.esb-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Email info highlight in conf-subtitle */
+.conf-subtitle strong {
+  color: #00ffae;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .email-sent-banner {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: unset;
+    font-size: 13px;
+  }
+}
