@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './help.css';
+import './Help.css';
 
 const FAQS = [
   { q: 'How do I cancel my booking?', a: 'Enter your Booking ID in the Cancel Ticket section below. Cancellations are free up to 4 hours before departure. Refunds are processed within 5-7 working days.' },
