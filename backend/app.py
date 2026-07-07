@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 import mysql.connector
 from mysql.connector import pooling
 import bcrypt
@@ -267,10 +268,11 @@ CORS(app)
 #   DATABASE CONNECTION POOL
 # ════════════════════════════════════════════
 db_config = {
-    "host":     "localhost",
-    "user":     "root",
-    "password": "",
-    "database": "go_journey"
+    "host": os.getenv("MYSQLHOST"),
+    "port": int(os.getenv("MYSQLPORT", 3306)),
+    "user": os.getenv("MYSQLUSER"),
+    "password": os.getenv("MYSQLPASSWORD"),
+    "database": os.getenv("MYSQLDATABASE"),
 }
 
 try:
