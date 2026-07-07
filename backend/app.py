@@ -266,7 +266,7 @@ CORS(app)
 
 # ════════════════════════════════════════════
 #   DATABASE CONNECTION POOL
-# ════════════════════════════════════════════
+# ══════════════════════════════════════════
 db_config = {
     "host": os.getenv("MYSQLHOST"),
     "user": os.getenv("MYSQLUSER"),
@@ -274,7 +274,6 @@ db_config = {
     "database": os.getenv("MYSQLDATABASE"),
     "port": int(os.getenv("MYSQLPORT", 3306))
 }
-
 try:
     pool = pooling.MySQLConnectionPool(
         pool_name="gojourney_pool",
@@ -812,6 +811,5 @@ def health():
 #   RUN
 # ════════════════════════════════════════════
 if __name__ == "__main__":
-    init_db()
-    print("🚀 GoJourney backend running on http://localhost:5000")
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    print("🚀 GoJourney backend running")
+    app.run(host="0.0.0.0", port=5000)
