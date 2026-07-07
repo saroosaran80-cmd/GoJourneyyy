@@ -793,14 +793,20 @@ def admin_analytics():
 # ════════════════════════════════════════════
 #   HEALTH CHECK
 # ════════════════════════════════════════════
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "GoJourney API is running successfully!"
+    }), 200
+
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({
         "status": "ok",
-        "app":    "GoJourney API",
-        "time":   datetime.now().isoformat()
+        "app": "GoJourney API",
+        "time": datetime.now().isoformat()
     }), 200
-
 
 # ════════════════════════════════════════════
 #   RUN
