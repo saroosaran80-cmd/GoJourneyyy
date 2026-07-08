@@ -1,62 +1,56 @@
-import React, { useState } from 'react';
-import './signup.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./signup.css";
 
-export default function Register({ onShowLogin }) {
+const API = "https://YOUR-RAILWAY-URL.up.railway.app";
+
+export default function Signup() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: ''
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  // ---------------- HANDLE CHANGE ----------------
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-    setError('');
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+    setError("");
   };
 
-  // ---------------- PASSWORD VALIDATION ----------------
-  const validatePassword = (pwd) => {
-    // Minimum 8 chars, at least 1 letter and 1 number
-    const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
-    return re.test(pwd);
-  };
-
-  // ---------------- SUBMIT ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.password) {
-      setError('All fields are required');
-      return;
-    }
-
-    if (!validatePassword(form.password)) {
-      setError('Password must be at least 8 characters with letters & numbers');
-      return;
-    }
-
     try {
       setLoading(true);
-      const res = await fetch('http://127.0.0.1:5000/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+
+      const res = await fetch(`${API}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Signup failed');
 
-      alert('Signup successful! Please login.');
-      onShowLogin();
+      if (!res.ok) {
+        setError(data.error || "Signup Failed");
+        return;
+      }
 
-      // Reset form
-      setForm({ name: '', email: '', password: '' });
+      alert("Signup Successful ✅");
+      navigate("/login");
+
     } catch (err) {
-      setError(err.message);
+      setError("Backend server not reachable");
     } finally {
       setLoading(false);
     }
@@ -64,7 +58,7 @@ export default function Register({ onShowLogin }) {
 
   return (
     <div className="auth-box">
-      <h2 className="auth-heading">Register</h2>
+      <h2>Signup</h2>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -73,6 +67,7 @@ export default function Register({ onShowLogin }) {
           placeholder="Name"
           value={form.name}
           onChange={handleChange}
+          required
         />
 
         <input
@@ -80,6 +75,15 @@ export default function Register({ onShowLogin }) {
           name="email"
           placeholder="Email"
           value={form.email}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone Number"
+          value={form.phone}
           onChange={handleChange}
         />
 
@@ -89,28 +93,24 @@ export default function Register({ onShowLogin }) {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
+          required
         />
-
-        <small style={{
-          fontSize: '10px',
-          color: '#666',
-          marginTop: '-10px',
-          marginBottom: '10px',
-          display: 'block'
-        }}>
-          (Min 8 chars, letters & numbers)
-        </small>
 
         {error && <p className="error-text">{error}</p>}
 
-        <button className="primary-btn" type="submit" disabled={loading}>
-          {loading ? 'Registering...' : 'Register'}
+        <button type="submit" disabled={loading}>
+          {loading ? "Signing up..." : "Signup"}
         </button>
       </form>
 
-      <p className="switch-text">
-        Already user?{' '}
-        <span onClick={onShowLogin}>Click here</span>
+      <p>
+        Already have an account?{" "}
+        <span
+          style={{ color: "blue", cursor: "pointer" }}
+          onClick={() => navigate("/login")}
+        >
+          Login
+        </span>
       </p>
     </div>
   );
