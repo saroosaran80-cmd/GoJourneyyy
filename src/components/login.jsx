@@ -13,7 +13,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-    const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -52,7 +52,7 @@ export default function Login() {
       const dest = location.state?.from || "/profile";
       navigate(dest);
 
-    } catch (err) {  // ✅ Inga thaan '}' add panniruken!
+    } catch (err) {
       console.error(err);
       setError("❌ Backend server not reachable");
     } finally {
@@ -60,3 +60,51 @@ export default function Login() {
     }
   };
 
+  return (
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2 className="login-title">Login</h2>
+
+        <form onSubmit={handleLogin}>
+          <input
+            className="login-input"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            className="login-input"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          {error && <p className="error-text">{error}</p>}
+
+          <button
+            className="login-btn"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <p className="signup-text">
+          New user?{" "}
+          <span
+            className="link-text"
+            onClick={() => navigate("/signup")}
+          >
+            Click here
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+}
