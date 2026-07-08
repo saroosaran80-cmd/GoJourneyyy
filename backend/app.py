@@ -792,6 +792,10 @@ def admin_analytics():
 # ════════════════════════════════════════════
 #   HEALTH CHECK
 # ════════════════════════════════════════════
+# ════════════════════════════════════════════
+#   HEALTH CHECK
+# ════════════════════════════════════════════
+
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({
@@ -806,6 +810,11 @@ def health():
         "app": "GoJourney API",
         "time": datetime.now().isoformat()
     }), 200
+
+
+# Create database tables when server starts
+init_db()
+
 
 # ════════════════════════════════════════════
 #   RUN
