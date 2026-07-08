@@ -52,16 +52,18 @@ export default function Login() {
       alert("✅ Login Successful");
 
       const dest = location.state?.from || "/profile";
-      navigate(dest);
+     try {
+  // signup code
 
-    } 
-    catch (err) {
-      console.error(err);
-      setError(" Backend server not reachable");
-    } finally {
-      setLoading(false);
-    }
-  };
+  navigate("/login");
+
+} catch (err) {
+  console.error(err);
+  setError("Backend server not reachable");
+
+} finally {
+  setLoading(false);
+}
 
   return (
     <div className="login-wrapper">
