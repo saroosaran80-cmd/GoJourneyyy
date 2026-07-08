@@ -26,35 +26,37 @@ export default function Signup() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const res = await fetch(`${API}/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+    const res = await fetch(`${API}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok) {
-        setError(data.error || "Signup Failed");
-        return;
-      }
-
-      alert("Signup Successful ✅");
-      navigate("/login");
-
-      catch (err) {
-      setError("Backend server not reachable");
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      setError(data.error || "Signup Failed");
+      return;
     }
-  };
+
+    alert("Signup Successful ✅");
+    navigate("/login");
+
+  } catch (err) {
+    console.error(err);
+    setError("Backend server not reachable");
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="auth-box">
