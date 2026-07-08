@@ -1,5 +1,3 @@
-// Edho oru update nu inga type pannunga
-
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./login.css";
@@ -16,52 +14,51 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  setError("");
+    e.preventDefault();
+    setError("");
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const res = await fetch(`${API}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email.toLowerCase(),
-        password: password,
-      }),
-    });
+      const res = await fetch(`${API}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.toLowerCase(),
+          password: password,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      setError(data.error || "Login failed");
-      return;
+      if (!res.ok) {
+        setError(data.error || "Login failed");
+        return;
+      }
+
+      localStorage.setItem(
+        "gj_user",
+        JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone || "",
+        })
+      );
+
+      alert("✅ Login Successful");
+
+      const dest = location.state?.from || "/profile";
+      navigate(dest);
+
+    } catch (err) {
+      console.error(err);
+      setError("Backend server not reachable");
+    } finally {
+      setLoading(false);
     }
-
-    localStorage.setItem(
-      "gj_user",
-      JSON.stringify({
-        name: data.name,
-        email: data.email,
-        phone: data.phone || "",
-      })
-    );
-
-    alert("✅ Login Successful");
-
-    const dest = location.state?.from || "/profile";
-    navigate(dest);
-
-  } catch (err) {
-    console.error(err);
-    setError("Backend server not reachable");
-
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="login-wrapper">
