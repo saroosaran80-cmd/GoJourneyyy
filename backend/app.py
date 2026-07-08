@@ -813,12 +813,30 @@ def health():
 
 
 # Create database tables when server starts
-init_db()
+def init_db():
+    try:
+        print("Creating tables...")
 
+        conn = get_conn()
+        cursor = conn.cursor()
 
-# ════════════════════════════════════════════
-#   RUN
-# ════════════════════════════════════════════
-if __name__ == "__main__":
-    print("🚀 GoJourney backend running")
-    app.run(host="0.0.0.0", port=5000)
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100),
+            email VARCHAR(100) UNIQUE,
+            password BLOB,
+            phone VARCHAR(20),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """)
+
+        conn.commit()
+
+        print("✅ Users table created")
+
+        cursor.close()
+        conn.close()
+
+    except Exception as e:
+        print("INIT DB ERROR:", e)
