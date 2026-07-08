@@ -4,7 +4,6 @@ import "./login.css";
 
 const API = "https://gojourneyyy-0hwx.onrender.com";
 
-const res = await fetch(`${API}/login`,  {
 export default function Login({ onShowRegister }) {
   const navigate = useNavigate();
   const location = useLocation();
