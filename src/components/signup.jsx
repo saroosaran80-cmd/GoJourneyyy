@@ -49,7 +49,7 @@ export default function Signup() {
       alert("Signup Successful ✅");
       navigate("/login");
 
-    } catch (err) {
+      catch (err) {
       setError("Backend server not reachable");
     } finally {
       setLoading(false);
