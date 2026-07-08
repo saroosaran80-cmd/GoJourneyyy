@@ -1,3 +1,5 @@
+// Edho oru update nu inga type pannunga
+
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./login.css";
