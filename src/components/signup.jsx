@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
 
-const API = "https://YOUR-RAILWAY-URL.up.railway.app";
+const API = "https://gojourneyyy-0hwx.onrender.com";
 
 export default function Signup() {
   const navigate = useNavigate();
