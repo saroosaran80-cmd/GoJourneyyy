@@ -52,7 +52,7 @@ export default function Login() {
       const dest = location.state?.from || "/profile";
       navigate(dest);
 
-    } catch (err) {
+      catch (err) {
       console.error(err);
       setError("❌ Backend server not reachable");
     } finally {
