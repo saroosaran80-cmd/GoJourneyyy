@@ -1,0 +1,325 @@
+/* ════════════ ANIMATED BUS SCENE ════════════ */
+.bus-scene {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  margin-top: 36px;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Clouds ── */
+.bs-cloud {
+  position: absolute;
+  font-size: 34px;
+  opacity: 0.35;
+  filter: grayscale(0.4) brightness(1.4);
+  animation: cloudDrift linear infinite;
+}
+
+.bs-cloud.c1 { top: 4px; font-size: 40px; animation-duration: 38s; }
+.bs-cloud.c2 { top: 36px; font-size: 26px; animation-duration: 26s; animation-delay: -12s; }
+.bs-cloud.c3 { top: 14px; font-size: 32px; animation-duration: 48s; animation-delay: -30s; }
+
+@keyframes cloudDrift {
+  from { left: 105%; }
+  to   { left: -12%; }
+}
+
+/* ── Skyline ── */
+.bs-skyline {
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  width: 200%;
+  animation: skylineScroll 40s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes skylineScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.bs-building {
+  width: var(--w, 34px);
+  height: var(--h, 60px);
+  background: linear-gradient(180deg, #2a2560, #1a1545);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bs-window {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #ffd76e;
+  border-radius: 1px;
+  opacity: 0.8;
+  animation: windowFlicker 3s ease-in-out infinite;
+}
+
+.bs-window.w1 { top: 20%; left: 20%; }
+.bs-window.w2 { top: 45%; left: 55%; animation-delay: 1s; }
+.bs-window.w3 { top: 68%; left: 30%; animation-delay: 2s; }
+
+@keyframes windowFlicker {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.25; }
+}
+
+/* ── Street lamps ── */
+.bs-lights {
+  position: absolute;
+  inset: 0 0 52px 0;
+}
+
+.bs-lamp {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 74px;
+  background: linear-gradient(180deg, #4a4580, #262050);
+  border-radius: 2px;
+  left: 110%;
+  animation: lampMove 8s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.bs-lamp-glow {
+  position: absolute;
+  top: -6px;
+  left: -5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff3b0 0%, rgba(255, 215, 110, 0.35) 55%, transparent 75%);
+  box-shadow: 0 0 18px 6px rgba(255, 215, 110, 0.35);
+}
+
+@keyframes lampMove {
+  from { left: 108%; }
+  to   { left: -4%; }
+}
+
+/* ── Bus ── */
+.bs-bus-wrap {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: busEnter 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+@keyframes busEnter {
+  from { transform: translateX(-160%); }
+  to   { transform: translateX(-50%); }
+}
+
+.bs-bus {
+  position: relative;
+  width: 300px;
+  animation: busBounce 0.9s ease-in-out infinite;
+}
+
+@keyframes busBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2.5px) rotate(0.3deg); }
+  75% { transform: translateY(1.5px) rotate(-0.3deg); }
+}
+
+.bs-bus-svg {
+  display: block;
+  width: 100%;
+  filter: drop-shadow(0 14px 22px rgba(0, 255, 174, 0.25));
+}
+
+.bs-headlight {
+  animation: headlightPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes headlightPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* Headlight beam */
+.bs-beam {
+  position: absolute;
+  right: -92px;
+  bottom: 28px;
+  width: 95px;
+  height: 36px;
+  background: linear-gradient(90deg, rgba(255, 248, 174, 0.45), transparent);
+  clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 62%);
+  animation: beamFlicker 2.2s ease-in-out infinite;
+}
+
+@keyframes beamFlicker {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.45; }
+}
+
+/* Wheels */
+.bs-wheel {
+  position: absolute;
+  bottom: -16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #15102e;
+  border: 5px solid #3c3568;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: wheelSpin 0.6s linear infinite;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.wheel-front { right: 34px; }
+.wheel-back { left: 34px; }
+
+.bs-hub {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00ffae;
+  position: relative;
+}
+
+.bs-hub::before,
+.bs-hub::after {
+  content: '';
+  position: absolute;
+  background: #0b0820;
+  left: 50%;
+  top: 50%;
+}
+
+.bs-hub::before {
+  width: 2.5px;
+  height: 13px;
+  transform: translate(-50%, -50%);
+}
+
+.bs-hub::after {
+  width: 13px;
+  height: 2.5px;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Exhaust smoke */
+.bs-smoke {
+  position: absolute;
+  left: -14px;
+  bottom: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  animation: smokePuff 1.8s ease-out infinite;
+}
+
+.bs-smoke.s2 { animation-delay: 0.6s; }
+.bs-smoke.s3 { animation-delay: 1.2s; }
+
+@keyframes smokePuff {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-44px, -34px) scale(2.1);
+    opacity: 0;
+  }
+}
+
+/* Speed lines */
+.bs-speedlines {
+  position: absolute;
+  left: -90px;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bs-speedlines span {
+  display: block;
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 174, 0.6));
+  animation: speedDash 0.7s linear infinite;
+}
+
+.bs-speedlines span:nth-child(2) { width: 42px; animation-delay: 0.2s; }
+.bs-speedlines span:nth-child(3) { width: 52px; animation-delay: 0.45s; }
+
+@keyframes speedDash {
+  0% { transform: translateX(26px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateX(-46px); opacity: 0; }
+}
+
+/* ── Road ── */
+.bs-road {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: linear-gradient(180deg, #221c48 0%, #16113a 100%);
+  border-top: 2px solid rgba(0, 255, 174, 0.25);
+  overflow: hidden;
+}
+
+.bs-road-dashes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%;
+  height: 4px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.55) 0 44px,
+    transparent 44px 86px
+  );
+  border-radius: 2px;
+  animation: roadScroll 0.9s linear infinite;
+}
+
+@keyframes roadScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-86px); }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .bus-scene *,
+  .bus-scene {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .bus-scene { height: 180px; }
+  .bs-bus { width: 210px; }
+  .bs-wheel { width: 32px; height: 32px; bottom: -12px; border-width: 4px; }
+  .wheel-front { right: 22px; }
+  .wheel-back { left: 22px; }
+  .bs-beam { right: -66px; width: 68px; }
+}
