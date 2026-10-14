@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BusScene from '../components/BusScene';
 import './Home.css';
 
 const POPULAR_ROUTES = [
@@ -12,11 +13,41 @@ const POPULAR_ROUTES = [
 ];
 
 const STATS = [
-  { value: '5M+', label: 'Happy Passengers', icon: '😊' },
-  { value: '1000+', label: 'Cities Covered', icon: '🗺️' },
-  { value: '500+', label: 'Bus Operators', icon: '🚌' },
-  { value: '99%', label: 'On-Time Rate', icon: '⏱️' },
+  { value: 5, suffix: 'M+', label: 'Happy Passengers', icon: '😊' },
+  { value: 1000, suffix: '+', label: 'Cities Covered', icon: '🗺️' },
+  { value: 500, suffix: '+', label: 'Bus Operators', icon: '🚌' },
+  { value: 99, suffix: '%', label: 'On-Time Rate', icon: '⏱️' },
 ];
+
+/* Count-up number that starts when it scrolls into view */
+function CountUp({ target, suffix }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !started.current) {
+        started.current = true;
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setCount(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 const FEATURES = [
   { icon: '🚌', title: 'Huge Network', desc: 'Connect to 1000+ cities across India with top operators.' },
@@ -51,6 +82,22 @@ function Home() {
   useEffect(() => {
     const t = setInterval(() => setActiveTestimonial(p => (p + 1) % TESTIMONIALS.length), 4000);
     return () => clearInterval(t);
+  }, []);
+
+  /* Scroll-reveal: fade/slide elements in as they enter the viewport */
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          obs.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    els.forEach(el => obs.observe(el));
+    return () => obs.disconnect();
   }, []);
 
   const getSuggestions = (val) =>
@@ -225,15 +272,18 @@ function Home() {
               </button>
             ))}
           </div>
+
+          {/* Animated Bus Scene */}
+          <BusScene />
         </div>
       </section>
 
       {/* ── STATS ── */}
       <section className="home-stats">
         {STATS.map((s, i) => (
-          <div key={i} className="stat-item">
+          <div key={i} className="stat-item reveal" style={{ '--rd': `${i * 0.1}s` }}>
             <div className="stat-icon">{s.icon}</div>
-            <div className="stat-value">{s.value}</div>
+            <div className="stat-value"><CountUp target={s.value} suffix={s.suffix} /></div>
             <div className="stat-label">{s.label}</div>
           </div>
         ))}
@@ -241,13 +291,13 @@ function Home() {
 
       {/* ── POPULAR ROUTES GRID ── */}
       <section className="home-section">
-        <div className="section-header">
+        <div className="section-header reveal">
           <h2>Popular <span className="grad-text">Routes</span></h2>
           <p>Most booked routes this week</p>
         </div>
         <div className="routes-grid">
           {POPULAR_ROUTES.map((r, i) => (
-            <div key={i} className="route-card" onClick={() => fillRoute(r)}>
+            <div key={i} className="route-card reveal" style={{ '--rd': `${i * 0.08}s` }} onClick={() => fillRoute(r)}>
               <div className="rc-icon">{r.icon}</div>
               <div className="rc-route">
                 <span className="rc-from">{r.from}</span>
@@ -266,13 +316,13 @@ function Home() {
 
       {/* ── FEATURES ── */}
       <section className="home-section alt-bg">
-        <div className="section-header">
+        <div className="section-header reveal">
           <h2>Why <span className="grad-text">GoJourney</span>?</h2>
           <p>Everything you need, all in one place</p>
         </div>
         <div className="features-grid">
           {FEATURES.map((f, i) => (
-            <div key={i} className="feature-card">
+            <div key={i} className="feature-card reveal" style={{ '--rd': `${i * 0.08}s` }}>
               <div className="fc-icon">{f.icon}</div>
               <h3>{f.title}</h3>
               <p>{f.desc}</p>
@@ -283,7 +333,7 @@ function Home() {
 
       {/* ── TESTIMONIALS ── */}
       <section className="home-section">
-        <div className="section-header">
+        <div className="section-header reveal">
           <h2>What <span className="grad-text">Passengers</span> Say</h2>
           <p>Trusted by millions of travellers</p>
         </div>
@@ -311,8 +361,11 @@ function Home() {
 
       {/* ── CTA BANNER ── */}
       <section className="home-cta">
-        <div className="cta-inner">
-          <div className="cta-icon">🚌</div>
+        <div className="cta-inner reveal">
+          <div className="cta-icon">
+            <span className="cta-bus">🚌</span>
+            <span className="cta-road-mini" />
+          </div>
           <h2>Ready to start your journey?</h2>
           <p>Book your next bus ticket in under 2 minutes</p>
           <button className="cta-btn" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
